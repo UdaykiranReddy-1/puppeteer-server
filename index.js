@@ -1,5 +1,5 @@
 const express = require('express');
-const puppeteer = require('puppeteer');
+const chromium = require('chrome-aws-lambda');
 const { getMapAvailability, getMapIframeUrl } = require('./bubblemapsService.js');
 
 const app = express();
@@ -18,10 +18,12 @@ async function generateMapScreenshot(chain, token) {
 
     const url = getMapIframeUrl(chain, token);
 
-    const browser = await puppeteer.launch({
-      executablePath: '/opt/render/.cache/puppeteer/chrome/linux-135.0.7049.84/chrome-linux64/chrome',
-      headless: true, // Works on most environments
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
+    const browser = await chromium.puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
+      ignoreHTTPSErrors: true
     });
 
     const page = await browser.newPage();
