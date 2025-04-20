@@ -1,6 +1,6 @@
 const express = require('express');
 const puppeteer = require('puppeteer');
-import {getMapAvailability, getMapIframeUrl} from './bubblemapsService.js';
+const { getMapAvailability, getMapIframeUrl } = require('./bubblemapsService.js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
