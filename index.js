@@ -32,14 +32,14 @@ async function generateMapScreenshot(chain, token) {
         '--single-process',
         '--disable-gpu'
       ],
-      headless: true
+      headless: "new"
     });
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1200, height: 800 });
     
     console.log(`Navigating to URL: ${url}`);
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
 
     console.log('Waiting for content to load...');
     await new Promise(resolve => setTimeout(resolve, 5000));
