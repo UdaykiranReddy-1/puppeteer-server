@@ -19,6 +19,7 @@ async function generateMapScreenshot(chain, token) {
     const url = getMapIframeUrl(chain, token);
 
     const browser = await puppeteer.launch({
+      executablePath: '/opt/render/.cache/puppeteer/chrome/linux-135.0.7049.84/chrome-linux64/chrome',
       headless: true, // Works on most environments
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
